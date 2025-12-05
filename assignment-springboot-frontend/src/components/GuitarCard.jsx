@@ -2,18 +2,25 @@ import { Link } from 'react-router-dom'
 
 export default function GuitarCard({ guitar }) {
     return (
-        <Link to={`/guitar/${guitar.id}`} className="flex p-3 rounded-xl hover:bg-gray-200 transition duration-150 shadow-sm hover:shadow-md bg-white w-full">
-
-            <div className="flex-shrink-0 mr-4">
+        <Link
+            to={`/guitar/${guitar.id}`}
+            className="group flex flex-col items-stretch bg-white rounded-2xl shadow-sm hover:shadow-lg transition duration-150 overflow-hidden"
+        >
+            <div className="w-full aspect-square overflow-hidden">
                 <img
-                    src={`https://picsum.photos/100/100?random=${guitar.id}`}
-                    alt={`${guitar.model} 기타 이미지" />`}
-                    className="w-16 h-16 object-cover rounded-lg shadow-md" />
+                    src={`https://picsum.photos/seed/${guitar.id}/400/400`}
+                    alt={`${guitar.model} 기타 이미지`}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
+                />
             </div>
 
-            <div className="flex-grow min-w-0">
-                <div className="text-lg font-semibold text-gray-800 truncate">{guitar.model}</div>
-                <div className="text-sm text-gray-500 truncate">{guitar.price.toLocaleString()}</div>
+            <div className="px-3 py-2">
+                <div className="text-base font-semibold text-gray-900 truncate">
+                    {guitar.model}
+                </div>
+                <div className="text-sm text-gray-500">
+                    {guitar.price.toLocaleString()}
+                </div>
             </div>
         </Link>
     )
