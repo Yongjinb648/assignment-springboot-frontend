@@ -1,24 +1,22 @@
 import { Routes, Route } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { useQuery } from '@tanstack/react-query'
 import GuitarList from './pages/GuitarList.jsx'
 import GuitarDetail from './pages/GuitarDetail.jsx'
 import { getGuitarList } from './api/guitarAPI.js'
 
 function App() {
-  const [guitars, setGuitars] = useState([])
+  const { data: guitars, isLoading, isError, error } = useQuery({
+    queryKey: ['guitars'],
+    queryFn: getGuitarList
+  })
 
-  useEffect(() => {
-    const fetchGuitars = async () => {
-      try {
-        const data = await getGuitarList()
-        setGuitars(data)
-      } catch (err) {
-        console.error("Failed to fetch guitars:", err)
-      }
-    }
+  if (isLoading) {
+    return <p className='text-center mt-10'>Loading...</p>
+  }
 
-    fetchGuitars()
-  }, [])
+  if (isError) {
+    return <p className='text-center mt-10'>Error! {error.message}</p>
+  }
 
   return (
     <Routes>

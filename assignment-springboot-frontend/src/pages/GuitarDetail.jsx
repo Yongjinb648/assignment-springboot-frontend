@@ -1,4 +1,6 @@
 import { useParams, Link } from 'react-router-dom'
+import { useQuery } from '@tanstack/react-query'
+import { getGuitarDetail } from '../api/guitarAPI'
 
 // 테스트용 하드코딩 데이터
 const guitar = {
@@ -12,6 +14,20 @@ const guitar = {
 
 const GuitarDetail = () => {
     const { id } = useParams()
+
+    const { data: guitar, isLoading, isError, error } = useQuery({
+        queryKey: ['guitar', id],
+        queryFn: () => getGuitarDetail(id),
+        enabled: !!id,
+    })
+
+    if (isLoading) {
+        return <p className='text-center mt-10'>Loading...</p>
+    }
+
+    if (isError) {
+        return <p className='text-center mt-10'>Error! {error.message}</p>
+    }
 
     return (
         <div className="min-h-screen bg-gray-50 p-6 flex justify-center items-center">
