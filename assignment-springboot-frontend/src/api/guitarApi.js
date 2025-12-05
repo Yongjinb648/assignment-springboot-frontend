@@ -4,8 +4,13 @@ const api = axios.create({
     baseURL: 'http://localhost:8080/api/guitars',
 })
 
-export const getGuitarList = async () => {
-    const res = await api.get(``)
+export const getGuitarList = async ({ sort = 'priceAsc', keyword = '' } = {}) => {
+    const res = await api.get('', {
+        params: {
+            sort,
+            keyword: keyword || undefined,
+        },
+    })
     return res.data
 }
 

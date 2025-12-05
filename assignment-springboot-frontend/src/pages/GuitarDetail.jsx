@@ -1,6 +1,6 @@
 import { useParams, Link } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
-import { getGuitarDetail } from '../api/guitarAPI'
+import { getGuitarDetail } from '../api/guitarApi'
 
 const GuitarDetail = () => {
     const { id } = useParams()

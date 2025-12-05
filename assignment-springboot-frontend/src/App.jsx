@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import GuitarList from './pages/GuitarList.jsx'
 import GuitarDetail from './pages/GuitarDetail.jsx'
-import { getGuitarList } from './api/guitarAPI.js'
+import { getGuitarList } from './api/guitarApi.js'
 
 function App() {
   const { data: guitars, isLoading, isError, error } = useQuery({
